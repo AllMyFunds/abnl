@@ -2,6 +2,7 @@ require "abnl/response/abn"
 require "abnl/response/entity_status"
 require "abnl/response/entity_type"
 require "abnl/response/gst"
+require "abnl/response/dgr_endorsement"
 
 class ABNL
   class Response
@@ -33,6 +34,10 @@ class ABNL
 
     def gst
       @gst ||= GST.new(business_entity.at_xpath("goodsAndServicesTax"))
+    end
+
+    def dgr_endorsement
+      @dgr_endorsement ||= DgrEndorsement.new(business_entity.at_xpath("dgrEndorsement"))
     end
 
     private
