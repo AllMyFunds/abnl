@@ -1,8 +1,13 @@
+require "abnl/response/effective_attributes"
+
 require "abnl/response/abn"
 require "abnl/response/entity_status"
 require "abnl/response/entity_type"
 require "abnl/response/gst"
 require "abnl/response/dgr_endorsement"
+require "abnl/response/individual"
+require "abnl/response/organisation"
+require "abnl/response/address"
 
 class ABNL
   class Response
@@ -38,6 +43,26 @@ class ABNL
 
     def dgr_endorsement
       @dgr_endorsement ||= DgrEndorsement.new(business_entity.at_xpath("dgrEndorsement"))
+    end
+
+    def legal_name
+      @legal_name ||= Individual.new(business_entity.at_xpath("legalName"))
+    end
+
+    def main_name
+      @main_name ||= Organisation.new(business_entity.at_xpath("mainName"))
+    end
+
+    def main_trading_name
+      @main_trading_name ||= Organisation.new(business_entity.at_xpath("mainTradingName"))
+    end
+
+    def other_trading_name
+      @other_trading_name ||= Organisation.new(business_entity.at_xpath("otherTradingName"))
+    end
+
+    def main_business_physical_address
+      @main_business_physical_address ||= Address.new(business_entity.at_xpath("mainBusinessPhysicalAddress"))
     end
 
     private

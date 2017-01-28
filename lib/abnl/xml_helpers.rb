@@ -1,14 +1,15 @@
 class ABNL
-  module XmlHelpers
 
-    NIL_DATE = Date.parse("0001-01-01").freeze
+  NIL_DATE = Date.parse("0001-01-01").freeze
+
+  module XmlHelpers
 
     def self.included(base)
       base.extend ClassMethods
     end
 
     def text(path, node = xml)
-      node.at_xpath(path)&.text
+      node&.at_xpath(path)&.text
     end
 
     def date(path, node = xml)

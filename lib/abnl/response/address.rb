@@ -1,17 +1,21 @@
 class ABNL
   class Response
-    class GST
+    class Address
+
       include XmlHelpers
       include EffectiveAttributes
 
       attr_reader :xml
+
+      text_attribute :state, "state"
+      text_attribute :postcode, "postcode"
 
       def initialize(xml)
         @xml = xml
       end
 
       def to_s
-        registered?.to_s
+        "#{state} #{postcode}"
       end
 
     end
